@@ -92,6 +92,7 @@ int main() {
 	//CORE MENU 1
 	int jmlinp;
 	float ongkir;
+	float resi[10];
 	
 	//========
 	// Untuk Checkpoint Kembali Ke Awal, dan Clear Screen
@@ -120,8 +121,9 @@ int main() {
 					printf("\nMasukkan Berat Paket =");
 					scanf("%f",&berat[i]);
 					printf("\nMassukkan Jenis Pengiriman");
-					
 					scanf("%f",&jenis_pengiriman[i]);
+					printf("\nMasukkan nomor resi = ");
+					scanf("%f",&resi[i]);
 					printf("Total Harga Pengiriman Adalah = %f",ongkir);
 				}
 			
@@ -132,7 +134,8 @@ int main() {
 			getch();
 			goto awal;
 		case 3:
-			printf("Coming Soon!");
+			printf("masukan nomer seri data yang akan dicari : ");
+			scanf ("%d"
 			getch();
 			goto awal;
 		case 4:
