@@ -13,13 +13,13 @@
 	Aplikasi Jasa Pengiriman (no.5)
 	Data : Barang Yang Akan Dikirim, Memiliki Karakteristik Berikut
 			- No Resi (Generate Angka Acak) (int resi)
-			- Nama Penerima (String) (String nama_penerima)
-			- Alamat Penerima (String) (String alamat_penerima)
-			- Nama Pengirim (String) (String nama_pengirim)
-			- Alamat Pengirim (String) (String alamat_pengirim)
-			- Berat (KG) (float) (float berat)
+			- Nama Penerima (String nama_penerima)
+			- Alamat Penerima (String alamat_penerima)
+			- Nama Pengirim (String nama_pengirim)
+			- Alamat Pengirim (String alamat_pengirim)
+			- Berat (KG) (float berat)
 			- Jenis Pengiriman (Kilat, Reguler, Dsb) (option using String) ??? 
-			- Total Harga Pengiriman (float) (float harga)
+			- Total Harga Pengiriman (float harga)
 			
 	Operasi : 
 			- Tambah Data
@@ -55,22 +55,76 @@ menu(){
 	printf("Pilihan Anda ===> ");
 }
 
-input(){
-	printf("Masukkan : ")
+jenis_pengiriman(char pengiriman){
+	float temp_ongkir;
+	
+	if (pengiriman == 1){
+		temp_ongkir = temp_ongkir + 30000;
+	} else if (pengiriman == 2){
+		temp_ongkir = temp_ongkir + 20000;
+	} else if (pengiriman == 3){
+		temp_ongkir = temp_ongkir + 10000;
+	}
 }
+
+struct pelanggan {
+	char nama_penerima[30];
+	char alamat_penerima[30];
+};
+typedef struct pelanggan pelanggan;
+
+struct pengirim {
+	char nama_pengirim[30];
+	char alamat_pengirim[30];
+};
+typedef struct pengirim pengirim;
+
+float berat [10];
+
+char pengiriman[10];
+
 
 int main() {
 	int pilihan;
 	
-	awal: //teleport
+	
+	//========
+	//CORE MENU 1
+	int jmlinp;
+	float ongkir;
+	
+	//========
+	// Untuk Checkpoint Kembali Ke Awal, dan Clear Screen
+	awal: 
 	system("cls");
-		
+	//========	
+	
 	menu();
 	scanf("%d",&pilihan);
 	
 	switch(pilihan){
 		case 1:
-			printf("Coming Soon!");
+			printf("Berapa Jumlah Data Yang Ingin Anda Input ? ");
+			scanf("%d",&jmlinp);
+			fflush(stdin); //clear buffer
+				
+				for (int i=0;i<=jmlinp;i++){
+					printf("\nMasukkan Nama Pelanggan =");
+					scanf("%c",&pelanggan.nama_penerima[i]);
+					printf("\nMasukkan Alamat Pelanggan =");
+					scanf("%c",&pelanggan.alamat_penerima[i]);
+					printf("\nMasukkan Nama Pengirim =");
+					scanf("%c",&pengirim.nama_pengirim[i]);
+					printf("\nMasukkan Alamat Pengirim =");
+					scanf("%c",&pengirim.alamat_pengirim[i]);
+					printf("\nMasukkan Berat Paket =");
+					scanf("%f",&berat[i]);
+					printf("\nMassukkan Jenis Pengiriman");
+					
+					scanf("%f",&jenis_pengiriman[i]);
+					printf("Total Harga Pengiriman Adalah = %f",ongkir);
+				}
+			
 			getch();
 			goto awal;
 		case 2:
