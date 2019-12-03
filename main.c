@@ -12,14 +12,14 @@
 	
 	Aplikasi Jasa Pengiriman (no.5)
 	Data : Barang Yang Akan Dikirim, Memiliki Karakteristik Berikut
-			- No Resi
-			- Nama Penerima
-			- Alamat Penerima
-			- Nama Pengirim
-			- Alamat Pengirim
-			- Berat (KG)
-			- Jenis Pengiriman (Kilat, Reguler, Dsb)
-			- Total Harga Pengiriman
+			- No Resi (Generate Angka Acak) (int resi)
+			- Nama Penerima (String) (String nama_penerima)
+			- Alamat Penerima (String) (String alamat_penerima)
+			- Nama Pengirim (String) (String nama_pengirim)
+			- Alamat Pengirim (String) (String alamat_pengirim)
+			- Berat (KG) (float) (float berat)
+			- Jenis Pengiriman (Kilat, Reguler, Dsb) (option using String) ??? 
+			- Total Harga Pengiriman (float) (float harga)
 			
 	Operasi : 
 			- Tambah Data
@@ -55,6 +55,10 @@ menu(){
 	printf("Pilihan Anda ===> ");
 }
 
+input(){
+	printf("Masukkan : ")
+}
+
 int main() {
 	int pilihan;
 	
@@ -66,7 +70,53 @@ int main() {
 	
 	switch(pilihan){
 		case 1:
-			printf("Ngantuk Bor");
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 2:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 3:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 4:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 5:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 6:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 7:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 8:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 9:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 10:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 11:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
+		case 12:
+			printf("Coming Soon!");
+			getch();
+			goto awal;
 		default:
 			printf("Input Anda Salah!, Silahkan Ulangi Lagi");
 			getch();
