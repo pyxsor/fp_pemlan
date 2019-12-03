@@ -55,6 +55,8 @@ menu(){
 	printf("Pilihan Anda ===> ");
 }
 
+char pengiriman[10];
+
 jenis_pengiriman(char pengiriman){
 	float temp_ongkir;
 	
@@ -70,30 +72,25 @@ jenis_pengiriman(char pengiriman){
 struct pelanggan {
 	char nama_penerima[30];
 	char alamat_penerima[30];
-};
-typedef struct pelanggan pelanggan;
+}pelanggan;
 
 struct pengirim {
 	char nama_pengirim[30];
 	char alamat_pengirim[30];
-};
-typedef struct pengirim pengirim;
+}pengirim;
 
 float berat [10];
-
-char pengiriman[10];
 
 
 int main() {
 	int pilihan;
-	
+	int i;
 	
 	//========
 	//CORE MENU 1
 	int jmlinp;
 	float ongkir;
-	float resi[10];
-	
+	int resi[10];
 	//========
 	// Untuk Checkpoint Kembali Ke Awal, dan Clear Screen
 	awal: 
@@ -109,7 +106,7 @@ int main() {
 			scanf("%d",&jmlinp);
 			fflush(stdin); //clear buffer
 				
-				for (int i=0;i<=jmlinp;i++){
+				for (i=0;i<=jmlinp;i++){
 					printf("\nMasukkan Nama Pelanggan =");
 					scanf("%c",&pelanggan.nama_penerima[i]);
 					printf("\nMasukkan Alamat Pelanggan =");
@@ -121,12 +118,15 @@ int main() {
 					printf("\nMasukkan Berat Paket =");
 					scanf("%f",&berat[i]);
 					printf("\nMassukkan Jenis Pengiriman");
-					scanf("%f",&jenis_pengiriman[i]);
+					scanf("%f",&pengiriman[i]);
 					printf("\nMasukkan nomor resi = ");
 					scanf("%f",&resi[i]);
+
 					printf("Total Harga Pengiriman Adalah = %f",ongkir);
+					
+//					resi[i] = resi[i]+rand()*30; (BETA RANDOM RESI)
+					print("Nomor Resi Anda adalah = %d",resi[i]);
 				}
-			
 			getch();
 			goto awal;
 		case 2:
@@ -134,6 +134,7 @@ int main() {
 			getch();
 			goto awal;
 		case 3:
+			printf("Coming Soon!");
 			printf("masukan nomer seri data yang akan dicari : ");
 			scanf ("%d"
 			getch();
