@@ -12,7 +12,7 @@
 	
 	Aplikasi Jasa Pengiriman (no.5)
 	Data : Barang Yang Akan Dikirim, Memiliki Karakteristik Berikut
-			- No Resi (Generate Angka Acak) (int resi)
+			- No Resi (For + Number)
 			- Nama Penerima (String nama_penerima)
 			- Alamat Penerima (String alamat_penerima)
 			- Nama Pengirim (String nama_pengirim)
@@ -26,16 +26,123 @@
 			- Ubah Data
 			- Pencarian Data Berdasarkan Kriteria
 			- Pengurutan Data Berdasarkan Kriteria
+			
+	Update 1.2 : Perubahan Algoritma, agar lebih memudahkan user dalam mengakses dan programer untuk mengedit
 	 */
 
+
+struct pelanggan {
+	char nama_penerima[30];
+	char alamat_penerima[30];
+}pelanggan;
+
+struct pengirim {
+	char nama_pengirim[30];
+	char alamat_pengirim[30];
+}pengirim;
+
+char pengiriman[30];
+float berat [30];
+
+//===============================================================================
 header(){
 	printf("\t\tSi Bungkus\t\t\n\n");
 	printf("Bungkusin Aja Paket Anda, Cepat Handal Murah\n");
 }
-
+//===============================================================================
 footer(){
 	printf("Final Project Pemrograman Lanjut Oleh Ayunda dan Handie");
 }
+//===============================================================================
+opsimenu(){
+	printf("1. Tambah Data");
+	printf("2. Lihat Data");
+	printf("3. Ubah Data");
+	printf("4. Cari Data");
+	printf("5. Urutkan Data");
+	printf("6. See Magic");
+	printf("7. Exit");
+}
+//===============================================================================
+void home(){
+	do{
+		header:
+		opsimenu:		
+		printf("Pilih Menu == ");
+		scanf("%d",menu);
+		system(cls);
+			
+		switch(menu){
+			case 1 :{
+				tambahdata(); 
+				break;
+			}
+			case 2:{
+				lihatdata();
+				break;
+			}
+			case 3:{
+				ubahdata();
+				break;
+			}
+			case 4:{
+				caridata();
+				break;
+			}
+			case 5:{
+				urutkandata();
+				break;
+			}
+			case 6:{
+				seemagic();
+				break;
+			}
+			case 7:{
+				exit(0);
+				break;
+			}
+			default:{
+				printf("Pilihan Menu Salah, Silahkan Ulangi Kembali");
+				home();
+				break;
+			}
+		}
+	} while (menu>=1 && menu<=7);
+}
+
+void tambahdata(){
+	printf("")
+}
+
+
+
+//===============================================================================
+int main(){
+	home();
+	return 0;
+}
+
+
+
+
+
+// ===============================SAMBUTAN=======================================
+
+
+
+
+
+
+
+
+
+
+void newdata(int i){
+	printf("Nomor Resi = %d", i+1);
+}
+
+
+
 
 menu(){
 	header();
@@ -55,31 +162,8 @@ menu(){
 	printf("Pilihan Anda ===> ");
 }
 
-char pengiriman[10];
+//==================================================================================
 
-jenis_pengiriman(char pengiriman){
-	float temp_ongkir;
-	
-	if (pengiriman == 1){
-		temp_ongkir = temp_ongkir + 30000;
-	} else if (pengiriman == 2){
-		temp_ongkir = temp_ongkir + 20000;
-	} else if (pengiriman == 3){
-		temp_ongkir = temp_ongkir + 10000;
-	}
-}
-
-struct pelanggan {
-	char nama_penerima[30];
-	char alamat_penerima[30];
-}pelanggan;
-
-struct pengirim {
-	char nama_pengirim[30];
-	char alamat_pengirim[30];
-}pengirim;
-
-float berat [10];
 
 
 int main() {
