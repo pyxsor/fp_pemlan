@@ -95,6 +95,52 @@ void cariorder();
 void urutkanorder();
 void seemagic();
 //===============================================================================
+void home(){
+	do{
+		header:
+		opsimenu:		
+		printf("Pilih Menu == ");
+		scanf("%d",menu);
+		system("cls");
+			
+		switch(menu){
+			case 1 :{
+				orderbaru(); 
+				break;
+			}
+			case 2:{
+				lihatorder();
+				break;
+			}
+			case 3:{
+				ubahorder();
+				break;
+			}
+			case 4:{
+				cariorder();
+				break;
+			}
+			case 5:{
+				urutkanorder();
+				break;
+			}
+			case 6:{
+				seemagic();
+				break;
+			}
+			case 7:{
+				exit(0);
+				break;
+			}
+			default:{
+				printf("Pilihan Menu Salah, Silahkan Ulangi Kembali");
+				home();
+				break;
+			}
+		}
+	} while (menu>=1 && menu<=7);
+}
+//===============================================================================
 void orderbaru(){
 	printf("Order Baru");
 //	input
@@ -223,57 +269,15 @@ void urutkanorder(){
 	}
 }
 //===============================================================================
-void home(){
-	do{
-		header:
-		opsimenu:		
-		printf("Pilih Menu == ");
-		scanf("%d",menu);
-		system("cls");
-			
-		switch(menu){
-			case 1 :{
-				orderbaru(); 
-				break;
-			}
-			case 2:{
-				lihatorder();
-				break;
-			}
-			case 3:{
-				ubahorder();
-				break;
-			}
-			case 4:{
-				cariorder();
-				break;
-			}
-			case 5:{
-				urutkanorder();
-				break;
-			}
-			case 6:{
-				seemagic();
-				break;
-			}
-			case 7:{
-				exit(0);
-				break;
-			}
-			default:{
-				printf("Pilihan Menu Salah, Silahkan Ulangi Kembali");
-				home();
-				break;
-			}
-		}
-	} while (menu>=1 && menu<=7);
+void seemagic(){
+	printf("Coming Soon!");
 }
-
 
 //===============================================================================
 int main(){
 	int arr[] = { 2, 3, 4, 10, 40 }; 
 	int n = sizeof(arr) / sizeof(arr[0]); 
+	x=10;
 	int result = binarySearch(arr, 0, n - 1, x); 
 	(result == -1) ? printf("Element is not present in array") : printf("Element is present at index %d", result);
 		
