@@ -43,9 +43,10 @@ struct pengirim {
 }pengirim;
 
 int pengiriman[30];
+char ketpengiriman[30];
 float berat [30];
 float ongkir [30];
-int menu,i;
+int menu,i,id;
 int x=0,y=0,z=0;
 y=10000;
 //===============================================================================
@@ -80,11 +81,11 @@ void cariorder();
 void urutkanorder();
 void seemagic();
 //===============================================================================
-void tambahdata(){
+void orderbaru(){
 	printf("Order Baru");
 //	input
 	printf("Nomer Resi Orderan Ini = %d", x+y+1);
-	
+	id[x] = x+y+1;
 	printf("\nMasukkan Nama Pelanggan =");
 	fflush (stdin);
 	scanf("%c",&pelanggan[x].nama_penerima);
@@ -125,17 +126,28 @@ void lihatorder(){
 		getch();
 	}
 	else{ for(i=0;i<=x;i++){
-		printf("==============No Resi : %d==============",x+y+1);
-		printf("Nama Penerima 		: ");
-		printf("Alamat Penerima 	: ");
-		printf("Nama Pengirim 		: ");
-		printf("Alamat Pengirim 	: ");
-		printf("Berat Paket 		: ");
-		printf("Jenis Pengiriman 	: ");
-		printf("Ongkir				: ");
+		printf("==============No Resi : %d==============\n",id[i]);
+		printf("Nama Penerima 		: %c\n",pelanggan[i].nama_penerima);
+		printf("Alamat Penerima 	: %c\n",pelanggan[i].alamat_penerima);
+		printf("Nama Pengirim 		: %c\n",pengirim[i].nama_pengirim);
+		printf("Alamat Pengirim 	: %c\n",pengirim[i].alamat_pengirim);
+		printf("Berat Paket 		: %f\n",berat[i]);
+		printf("Jenis Pengiriman 	: %c\n",ketpengiriman[i]);
+		printf("Ongkir				: %f\n",ongkir[i]);
+		printf("========================================\n");
+	}
+	}
+}
+//===============================================================================
+void ubahorder(){
+	system("cls");
+	printf("Cetak Semua Transaksi Order");
+	if (x==0){
+		printf("Belum Ada Transaksi Tersimpan!");
+		getch();
+	}
+	else
 	
-	}
-	}
 }
 //===============================================================================
 void home(){
