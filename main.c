@@ -28,9 +28,10 @@
 			- Pengurutan Data Berdasarkan Kriteria
 			
 	Update 1.2 : Perubahan Algoritma, agar lebih memudahkan user dalam mengakses dan programer untuk mengedit
+	Update 1.2.1 : Rehat Sejenak, Mari Kita Makan :)
 	 */
 
-
+//===============================================================================
 struct pelanggan {
 	char nama_penerima[30];
 	char alamat_penerima[30];
@@ -41,9 +42,12 @@ struct pengirim {
 	char alamat_pengirim[30];
 }pengirim;
 
-char pengiriman[30];
+int pengiriman[30];
 float berat [30];
-
+float ongkir [30];
+int menu,i;
+int x=0,y=0,z=0;
+y=10000;
 //===============================================================================
 header(){
 	printf("\t\tSi Bungkus\t\t\n\n");
@@ -55,13 +59,83 @@ footer(){
 }
 //===============================================================================
 opsimenu(){
-	printf("1. Tambah Data");
-	printf("2. Lihat Data");
-	printf("3. Ubah Data");
-	printf("4. Cari Data");
-	printf("5. Urutkan Data");
-	printf("6. See Magic");
-	printf("7. Exit");
+	printf("\n1. Tambah Data");
+	printf("\n2. Lihat Data");
+	printf("\n3. Ubah Data");
+	printf("\n4. Cari Data");
+	printf("\n5. Urutkan Data");
+	printf("\n6. See Magic");
+	printf("\n7. Exit");
+}
+jenispengiriman(){
+	printf("\n1. Besok Sampai");
+	printf("\n2. 2-3 Hari Sampai");
+	printf("\n3. 4-7 Hari Kerja Sampai");
+}
+//===============================================================================
+void orderbaru();
+void lihatorder();
+void ubahorder();
+void cariorder();
+void urutkanorder();
+void seemagic();
+//===============================================================================
+void tambahdata(){
+	printf("Order Baru");
+//	input
+	printf("Nomer Resi Orderan Ini = %d", x+y+1);
+	
+	printf("\nMasukkan Nama Pelanggan =");
+	fflush (stdin);
+	scanf("%c",&pelanggan[x].nama_penerima);
+	printf("\nMasukkan Alamat Pelanggan =");
+	fflush (stdin);
+	scanf("%c",&pelanggan[x].alamat_penerima);
+	printf("\nMasukkan Nama Pengirim =");
+	fflush (stdin);
+	scanf("%c",&pengirim[x].nama_pengirim);
+	printf("\nMasukkan Alamat Pengirim =");
+	fflush (stdin);
+	scanf("%c",&pengirim[x].alamat_pengirim);
+	printf("\nMasukkan Berat Paket =");
+	fflush (stdin);
+	scanf("%f",&berat[x]);
+	printf("\nMassukkan Jenis Pengiriman");
+	jenispengiriman:
+	fflush (stdin);
+	scanf("%d",&pengiriman[x]);
+	if (pengiriman == 1){
+		ongkir = ongkir + 30000;
+	} else if (pengiriman == 2){
+		ongkir = ongkir + 20000;
+	} else if (pengiriman == 3){
+		ongkir = ongkir + 10000
+	}
+	x++;
+	printf("Order Baru Telah Diterima,");
+	getch();
+	system("cls");
+}
+//===============================================================================
+void lihatorder(){
+	system("cls");
+	printf("Cetak Semua Transaksi Order");
+	if (x==0){
+		printf("Belum Ada Transaksi Tersimpan!");
+		getch();
+	}
+	else{ for(i=0;i<=x;i++){
+		printf("==============No Resi : %d==============",x+y+1);
+		printf("Nama Penerima 		: ");
+		printf("Alamat Penerima 	: ");
+		printf("Nama Pengirim 		: ");
+		printf("Alamat Pengirim 	: ");
+		printf("Berat Paket 		: ");
+		printf("Jenis Pengiriman 	: ");
+		printf("Ongkir				: ");
+	
+	}
+	}
 }
 //===============================================================================
 void home(){
@@ -74,23 +148,23 @@ void home(){
 			
 		switch(menu){
 			case 1 :{
-				tambahdata(); 
+				orderbaru(); 
 				break;
 			}
 			case 2:{
-				lihatdata();
+				lihatorder();
 				break;
 			}
 			case 3:{
-				ubahdata();
+				ubahorder();
 				break;
 			}
 			case 4:{
-				caridata();
+				cariorder();
 				break;
 			}
 			case 5:{
-				urutkandata();
+				urutkanorder();
 				break;
 			}
 			case 6:{
@@ -110,9 +184,6 @@ void home(){
 	} while (menu>=1 && menu<=7);
 }
 
-void tambahdata(){
-	printf("")
-}
 
 
 
@@ -191,20 +262,7 @@ int main() {
 			fflush(stdin); //clear buffer
 				
 				for (i=0;i<=jmlinp;i++){
-					printf("\nMasukkan Nama Pelanggan =");
-					scanf("%c",&pelanggan.nama_penerima[i]);
-					printf("\nMasukkan Alamat Pelanggan =");
-					scanf("%c",&pelanggan.alamat_penerima[i]);
-					printf("\nMasukkan Nama Pengirim =");
-					scanf("%c",&pengirim.nama_pengirim[i]);
-					printf("\nMasukkan Alamat Pengirim =");
-					scanf("%c",&pengirim.alamat_pengirim[i]);
-					printf("\nMasukkan Berat Paket =");
-					scanf("%f",&berat[i]);
-					printf("\nMassukkan Jenis Pengiriman");
-					scanf("%f",&pengiriman[i]);
-					printf("\nMasukkan nomor resi = ");
-					scanf("%f",&resi[i]);
+					
 
 					printf("Total Harga Pengiriman Adalah = %f",ongkir);
 					
