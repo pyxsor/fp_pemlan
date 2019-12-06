@@ -28,27 +28,41 @@
 			- Pengurutan Data Berdasarkan Kriteria
 			
 	Update 1.2 : Perubahan Algoritma, agar lebih memudahkan user dalam mengakses dan programer untuk mengedit
-	Update 1.2.1 : Rehat Sejenak, Mari Kita Makan :)
+	Update 1.2.2 : Rehat Sejenak, JANGAN LUPA ISTIRAHAT! :)
 	 */
 
 //===============================================================================
 struct pelanggan {
 	char nama_penerima[30];
 	char alamat_penerima[30];
-}pelanggan;
+}pelanggan[30];
 
 struct pengirim {
 	char nama_pengirim[30];
 	char alamat_pengirim[30];
-}pengirim;
+}pengirim[30];
 
 int pengiriman[30];
 char ketpengiriman[30];
 float berat [30];
-float ongkir [30];
-int menu,i,id;
-int x=0,y=0,z=0;
-y=10000;
+float ongkir[30];
+int menu,i,id[30];
+int x=0,y=10000,z=0;
+//===============================================================================
+//Main Binary Search (default)
+int binarySearch(int arr[], int l, int r, int x) 
+{ 
+	if (r >= l) { 
+		int mid = l + (r - l) / 2; 
+
+		if (arr[mid] == x) 
+			return mid;  
+		if (arr[mid] > x) 
+			return binarySearch(arr, l, mid - 1, x);  
+		return binarySearch(arr, mid + 1, r, x); 
+	} 
+	return -1; 
+} 
 //===============================================================================
 header(){
 	printf("\t\tSi Bungkus\t\t\n\n");
@@ -105,12 +119,12 @@ void orderbaru(){
 	jenispengiriman:
 	fflush (stdin);
 	scanf("%d",&pengiriman[x]);
-	if (pengiriman == 1){
-		ongkir = ongkir + 30000;
-	} else if (pengiriman == 2){
-		ongkir = ongkir + 20000;
-	} else if (pengiriman == 3){
-		ongkir = ongkir + 10000
+	if (pengiriman[x] == 1){
+		ongkir[x] = ongkir[x] + 30000;
+	} else if (pengiriman[x] == 2){
+		ongkir[x] = ongkir[x] + 20000;
+	} else if (pengiriman[x] == 3){
+		ongkir[x] = ongkir[x] + 10000;
 	}
 	x++;
 	printf("Order Baru Telah Diterima,");
@@ -140,14 +154,73 @@ void lihatorder(){
 }
 //===============================================================================
 void ubahorder(){
+	int cariresi;
+	
 	system("cls");
 	printf("Cetak Semua Transaksi Order");
+	
 	if (x==0){
 		printf("Belum Ada Transaksi Tersimpan!");
 		getch();
 	}
-	else
+	else{
+		printf("Masukkan No Resi Yang Ingin di Cek : ");
+		scanf("%d",&cariresi);
+		// pake algoritma binary search?
+	}
 	
+}
+//===============================================================================
+void cariorder(){
+	printf("Cari Data Transaksi");
+	printf("\n1. Cari dengan No Resi");
+	printf("\n2. Cari dengan Total Harga");
+	printf("\n3. Cari dengan Berat");
+	printf("\n4. Kembali Ke Home\n");
+	printf("\nPilihan Anda == ");
+	fflush (stdin);
+	scanf("%d",&menu);
+	switch(menu){
+		case 1:
+		printf("Masukkan No Resi yang ingin dicari == ");
+		case 2:
+		printf("Masukkan Total Harga yang ingin dicari == ");
+		case 3:
+		printf("Masukkan Berat barang yang ingin dicari == ");
+		case 4:
+		system("cls");
+		home();	
+	}
+}
+//===============================================================================
+void urutkanorder(){
+	printf("Urutkan Order Berdasarkan");
+	printf("\n1. Urutkan Order dengan No Resi");
+	printf("\n2. Urutkan Order dengan Alamat A-Z");
+	printf("\n3. Urutkan Order dengan Nama A-Z");
+	printf("\n4. Urutkan Order dengan Berat Terkecil");
+	printf("\n5. Urutkan Order dengan Pengiriman Tercepat-Terlambat");
+	printf("\n6. Urutkan Order dengan Harga Termurah");
+	printf("\nPilihan Anda == ");
+	fflush (stdin);
+	scanf("%d",&menu);
+	switch(menu){
+		case 1:
+		printf("Data setelah diurutkan");
+		case 2:
+		printf("Data setelah diurutkan");
+		case 3:
+		printf("Data setelah diurutkan");
+		case 4:
+		printf("Data setelah diurutkan");
+		case 5:
+		printf("Data setelah diurutkan");
+		case 6:
+		printf("Data setelah diurutkan");
+		case 7:
+		system("cls");
+		home();	
+	}
 }
 //===============================================================================
 void home(){
@@ -156,7 +229,7 @@ void home(){
 		opsimenu:		
 		printf("Pilih Menu == ");
 		scanf("%d",menu);
-		system(cls);
+		system("cls");
 			
 		switch(menu){
 			case 1 :{
@@ -197,37 +270,21 @@ void home(){
 }
 
 
-
-
 //===============================================================================
 int main(){
+	int arr[] = { 2, 3, 4, 10, 40 }; 
+	int n = sizeof(arr) / sizeof(arr[0]); 
+	int result = binarySearch(arr, 0, n - 1, x); 
+	(result == -1) ? printf("Element is not present in array") : printf("Element is present at index %d", result);
+		
 	home();
 	return 0;
 }
 
 
-
-
-
 // ===============================SAMBUTAN=======================================
 
-
-
-
-
-
-
-
-
-
-void newdata(int i){
-	printf("Nomor Resi = %d", i+1);
-}
-
-
-
-
-menu(){
+menu9(){
 	header();
 	printf("\nPilih Menu:\n");
 	printf("1. Input Pengiriman Baru\n");
@@ -248,7 +305,7 @@ menu(){
 //==================================================================================
 
 
-
+/*
 int main() {
 	int pilihan;
 	int i;
@@ -336,3 +393,4 @@ int main() {
 	}
 	return 0;
 }
+*/
