@@ -46,20 +46,21 @@ int pengiriman[30];
 char ketpengiriman[30];
 float berat [30];
 float ongkir[30];
-int menu,i,id[30];
+int menu1,menu,i,id[30];
 int x=0,y=10000,z=0;
+int pilihan;
 //===============================================================================
 //Main Binary Search (default)
 int binarySearch(int arr[], int l, int r, int x) 
 { 
-	if (r >= l) { 
-		int mid = l + (r - l) / 2; 
-
-		if (arr[mid] == x) 
-			return mid;  
-		if (arr[mid] > x) 
-			return binarySearch(arr, l, mid - 1, x);  
-		return binarySearch(arr, mid + 1, r, x); 
+	while (l <= r) { 
+		int m = l + (r - l) / 2; 
+		if (arr[m] == x) 
+			return m; 
+		if (arr[m] < x) 
+			l = m + 1; 
+		else
+			r = m - 1; 
 	} 
 	return -1; 
 } 
@@ -80,7 +81,7 @@ opsimenu(){
 	printf("\n4. Cari Data");
 	printf("\n5. Urutkan Data");
 	printf("\n6. See Magic");
-	printf("\n7. Exit");
+	printf("\n7. Exit\n\n");
 }
 jenispengiriman(){
 	printf("\n1. Besok Sampai");
@@ -88,7 +89,7 @@ jenispengiriman(){
 	printf("\n3. 4-7 Hari Kerja Sampai");
 }
 //===============================================================================
-void orderbaru();
+//void orderbaru();
 void lihatorder();
 void ubahorder();
 void cariorder();
@@ -96,11 +97,11 @@ void urutkanorder();
 void seemagic();
 //===============================================================================
 void home(){
-	do{
-		header:
-		opsimenu:		
+	do {
+		header();
+		opsimenu();		
 		printf("Pilih Menu == ");
-		scanf("%d",menu);
+		scanf("%d",&menu);
 		system("cls");
 			
 		switch(menu){
@@ -141,7 +142,7 @@ void home(){
 	} while (menu>=1 && menu<=7);
 }
 //===============================================================================
-void orderbaru(){
+orderbaru(){
 	printf("Order Baru");
 //	input
 	printf("Nomer Resi Orderan Ini = %d", x+y+1);
@@ -309,92 +310,3 @@ menu9(){
 //==================================================================================
 
 
-/*
-int main() {
-	int pilihan;
-	int i;
-	
-	//========
-	//CORE MENU 1
-	int jmlinp;
-	float ongkir;
-	int resi[10];
-	//========
-	// Untuk Checkpoint Kembali Ke Awal, dan Clear Screen
-	awal: 
-	system("cls");
-	//========	
-	
-	menu();
-	scanf("%d",&pilihan);
-	
-	switch(pilihan){
-		case 1:
-			printf("Berapa Jumlah Data Yang Ingin Anda Input ? ");
-			scanf("%d",&jmlinp);
-			fflush(stdin); //clear buffer
-				
-				for (i=0;i<=jmlinp;i++){
-					
-
-					printf("Total Harga Pengiriman Adalah = %f",ongkir);
-					
-//					resi[i] = resi[i]+rand()*30; (BETA RANDOM RESI)
-					print("Nomor Resi Anda adalah = %d",resi[i]);
-				}
-			getch();
-			goto awal;
-		case 2:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 3:
-			printf("Coming Soon!");
-			printf("masukan nomer seri data yang akan dicari : ");
-			scanf ("%d"
-			getch();
-			goto awal;
-		case 4:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 5:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 6:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 7:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 8:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 9:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 10:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 11:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		case 12:
-			printf("Coming Soon!");
-			getch();
-			goto awal;
-		default:
-			printf("Input Anda Salah!, Silahkan Ulangi Lagi");
-			getch();
-			goto awal;
-	}
-	return 0;
-}
-*/
