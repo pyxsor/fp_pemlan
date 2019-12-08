@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 soal(){
 
 /* 	Final Project
@@ -36,6 +37,7 @@ soal(){
 struct pelanggan {
 	char nama_penerima[30];
 	char alamat_penerima[30];
+	char ketpengiriman[30];
 }pelanggan[30];
 
 struct pengirim {
@@ -44,28 +46,51 @@ struct pengirim {
 }pengirim[30];
 
 int pengiriman[30];
-char ketpengiriman[30];
 float berat [30];
 float ongkir[30];
 int menu1,menu,i,id[30];
 int x=0,y=10000,z=0;
 int pilihan;
+int arr[30];
+//===============================================================================
+//Binary Search
+/* int binary_search1(int *cariresi){ // No Resi
+   
+    int t;
+    int k = x - 1;
+    int l = 0;
+  
+    while ( l <= k )
+    {
+        t = (l + k) / 2;
+        hasil = strcmp(x, cariresi);
+
+        if (hasil == -1)
+            l = t + 1;
+        else if (hasil == 1)
+            k = t - 1;
+        else
+            return t;
+    }       
+    return -1;  
+}
+*/
 //===============================================================================
 //Main Binary Search (default)
 /*
-int binarySearch(int arr[], int l, int r, int x) 
-{ 
+int binarySearch(int arr[], int l, int r, int cariresi){ 
 	while (l <= r) { 
 		int m = l + (r - l) / 2; 
-		if (arr[m] == x) 
+		if (arr[m] == cariresi) 
 			return m; 
-		if (arr[m] < x) 
+		if (arr[m] < cariresi) 
 			l = m + 1; 
 		else
 			r = m - 1; 
 	} 
 	return -1; 
-}  */
+}
+*/
 //===============================================================================
 header(){
 	printf("\n\t\tSi Bungkus\t\t\n\n");
@@ -170,15 +195,15 @@ orderbaru(){
 	fflush (stdin);
 	printf("\nPilihan Anda =");
 	scanf("%d",&pengiriman[x]);
-	if (pengiriman[x] == 1){
+	if(pengiriman[x] == 1){
+		strcpy(pelanggan[i].ketpengiriman,"Besok Sampai");
 		ongkir[x] = ongkir[x] + 30000;
-		ketpengiriman[x],"Besok Sampai";
-	} else if (pengiriman[x] == 2){
+	} else if(pengiriman[x] == 2){
+		strcpy(pelanggan[i].ketpengiriman,"2-3 Hari Sampai");
 		ongkir[x] = ongkir[x] + 20000;
-		ketpengiriman[x],"2-3 Hari Sampai";
-	} else if (pengiriman[x] == 3){
+	} else if(pengiriman[x] == 3) {
+		strcpy(pelanggan[i].ketpengiriman,"4-7 Hari Kerja Sampai");
 		ongkir[x] = ongkir[x] + 10000;
-		ketpengiriman[x],"4-7 Hari Kerja Sampai";
 	}
 	x++;
 	printf("Order Baru Telah Diterima,");
@@ -201,7 +226,7 @@ void lihatorder(){
 		printf("Nama Pengirim 		: %s\n",pengirim[i].nama_pengirim);
 		printf("Alamat Pengirim 	: %s\n",pengirim[i].alamat_pengirim);
 		printf("Berat Paket 		: %f\n",berat[i]);
-		printf("Jenis Pengiriman 	: %s\n",ketpengiriman[i]);
+		printf("Jenis Pengiriman 	: %s\n",pelanggan[i].ketpengiriman);
 		printf("Ongkir				: %f\n",ongkir[i]);
 		printf("========================================\n");
 	}
@@ -230,6 +255,7 @@ void ubahorder(){
 }
 //===============================================================================
 void cariorder(){
+	int cariresi,a,hasil;
 	printf("Cari Data Transaksi");
 	printf("\n1. Cari dengan No Resi");
 	printf("\n2. Cari dengan Total Harga");
@@ -241,6 +267,21 @@ void cariorder(){
 	switch(menu){
 		case 1:
 		printf("Masukkan No Resi yang ingin dicari == ");
+		scanf("%d", &cariresi);
+		if(x==0){
+			printf("\nTidak Ada Data Tersimpan, Silahkan Tambahkan Terlebih Dahulu!");
+			getch();
+			system("cls");
+			cariorder();
+		} else {
+			for (i=0; i<x;i++){
+				printf("============ Resi No = %d ============", x);
+//				hasil = binary_search1(a,cariresi,x);
+			}
+		}
+	
+	
+		getch();
 		case 2:
 		printf("Masukkan Total Harga yang ingin dicari == ");
 		case 3:
@@ -287,13 +328,7 @@ void seemagic(){
 
 //===============================================================================
 int main(){
-/*
-	int arr[] = { 2, 3, 4, 10, 40 }; 
-	int n = sizeof(arr) / sizeof(arr[0]); 
-	x=10;
-	int result = binarySearch(arr, 0, n - 1, x); 
-	(result == -1) ? printf("Element is not present in array") : printf("Element is present at index %d", result);
-*/		
+		
 	home();
 	return 0;
 }
