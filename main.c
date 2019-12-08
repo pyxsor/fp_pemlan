@@ -196,13 +196,13 @@ orderbaru(){
 	printf("\nPilihan Anda =");
 	scanf("%d",&pengiriman[x]);
 	if(pengiriman[x] == 1){
-		strcpy(pelanggan[i].ketpengiriman,"Besok Sampai");
+		strcpy(pelanggan[x].ketpengiriman,"Besok Sampai");
 		ongkir[x] = ongkir[x] + 30000;
 	} else if(pengiriman[x] == 2){
-		strcpy(pelanggan[i].ketpengiriman,"2-3 Hari Sampai");
+		strcpy(pelanggan[x].ketpengiriman,"2-3 Hari Sampai");
 		ongkir[x] = ongkir[x] + 20000;
-	} else if(pengiriman[x] == 3) {
-		strcpy(pelanggan[i].ketpengiriman,"4-7 Hari Kerja Sampai");
+	} else if(pengiriman[x] == 3){
+		strcpy(pelanggan[x].ketpengiriman,"4-7 Hari Kerja Sampai");
 		ongkir[x] = ongkir[x] + 10000;
 	}
 	x++;
@@ -228,7 +228,7 @@ void lihatorder(){
 		printf("Berat Paket 		: %f\n",berat[i]);
 		printf("Jenis Pengiriman 	: %s\n",pelanggan[i].ketpengiriman);
 		printf("Ongkir				: %f\n",ongkir[i]);
-		printf("========================================\n");
+		printf("========================================\n\n");
 	}
 	printf("That's All, Tekan ENTER untuk Kembali");
 	getch();
