@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+soal(){
 
 /* 	Final Project
 	Nama Anggota Kelompok 8:
@@ -30,7 +31,7 @@
 	Update 1.2 : Perubahan Algoritma, agar lebih memudahkan user dalam mengakses dan programer untuk mengedit
 	Update 1.2.2 : Rehat Sejenak, JANGAN LUPA ISTIRAHAT! :)
 	 */
-
+}
 //===============================================================================
 struct pelanggan {
 	char nama_penerima[30];
@@ -51,6 +52,7 @@ int x=0,y=10000,z=0;
 int pilihan;
 //===============================================================================
 //Main Binary Search (default)
+/*
 int binarySearch(int arr[], int l, int r, int x) 
 { 
 	while (l <= r) { 
@@ -63,10 +65,10 @@ int binarySearch(int arr[], int l, int r, int x)
 			r = m - 1; 
 	} 
 	return -1; 
-} 
+}  */
 //===============================================================================
 header(){
-	printf("\t\tSi Bungkus\t\t\n\n");
+	printf("\n\t\tSi Bungkus\t\t\n\n");
 	printf("Bungkusin Aja Paket Anda, Cepat Handal Murah\n");
 }
 //===============================================================================
@@ -83,6 +85,7 @@ opsimenu(){
 	printf("\n6. See Magic");
 	printf("\n7. Exit\n\n");
 }
+
 jenispengiriman(){
 	printf("\n1. Besok Sampai");
 	printf("\n2. 2-3 Hari Sampai");
@@ -145,33 +148,37 @@ void home(){
 orderbaru(){
 	printf("Order Baru");
 //	input
-	printf("Nomer Resi Orderan Ini = %d", x+y+1);
-	id[x] = x+y+1;
-	printf("\nMasukkan Nama Pelanggan =");
+	printf("Nomer Resi Orderan Ini = %d - %d",y,x);
+	id[x] = x;
+	printf("\n\nMasukkan Nama Penerima =");
 	fflush (stdin);
-	scanf("%c",&pelanggan[x].nama_penerima);
-	printf("\nMasukkan Alamat Pelanggan =");
+	scanf("%s",&pelanggan[x].nama_penerima);
+	printf("Masukkan Alamat Penerima =");
 	fflush (stdin);
-	scanf("%c",&pelanggan[x].alamat_penerima);
-	printf("\nMasukkan Nama Pengirim =");
+	scanf("%s",&pelanggan[x].alamat_penerima);
+	printf("Masukkan Nama Pengirim =");
 	fflush (stdin);
-	scanf("%c",&pengirim[x].nama_pengirim);
-	printf("\nMasukkan Alamat Pengirim =");
+	scanf("%s",&pengirim[x].nama_pengirim);
+	printf("Masukkan Alamat Pengirim =");
 	fflush (stdin);
-	scanf("%c",&pengirim[x].alamat_pengirim);
-	printf("\nMasukkan Berat Paket =");
+	scanf("%s",&pengirim[x].alamat_pengirim);
+	printf("Masukkan Berat Paket =");
 	fflush (stdin);
 	scanf("%f",&berat[x]);
-	printf("\nMassukkan Jenis Pengiriman");
-	jenispengiriman:
+	printf("Massukkan Jenis Pengiriman");
+	jenispengiriman();
 	fflush (stdin);
+	printf("\nPilihan Anda =");
 	scanf("%d",&pengiriman[x]);
 	if (pengiriman[x] == 1){
 		ongkir[x] = ongkir[x] + 30000;
+		ketpengiriman[x],"Besok Sampai";
 	} else if (pengiriman[x] == 2){
 		ongkir[x] = ongkir[x] + 20000;
+		ketpengiriman[x],"2-3 Hari Sampai";
 	} else if (pengiriman[x] == 3){
 		ongkir[x] = ongkir[x] + 10000;
+		ketpengiriman[x],"4-7 Hari Kerja Sampai";
 	}
 	x++;
 	printf("Order Baru Telah Diterima,");
@@ -181,27 +188,31 @@ orderbaru(){
 //===============================================================================
 void lihatorder(){
 	system("cls");
-	printf("Cetak Semua Transaksi Order");
+	printf("\n\t\tCetak Semua Transaksi Order\t\t\n\n");
 	if (x==0){
-		printf("Belum Ada Transaksi Tersimpan!");
+		printf("\n\nBelum Ada Transaksi Tersimpan!");
 		getch();
+		system("cls");
 	}
-	else{ for(i=0;i<=x;i++){
+	else{ for(i=0;i<x;i++){
 		printf("==============No Resi : %d==============\n",id[i]);
-		printf("Nama Penerima 		: %c\n",pelanggan[i].nama_penerima);
-		printf("Alamat Penerima 	: %c\n",pelanggan[i].alamat_penerima);
-		printf("Nama Pengirim 		: %c\n",pengirim[i].nama_pengirim);
-		printf("Alamat Pengirim 	: %c\n",pengirim[i].alamat_pengirim);
+		printf("Nama Penerima 		: %s\n",pelanggan[i].nama_penerima);
+		printf("Alamat Penerima 	: %s\n",pelanggan[i].alamat_penerima);
+		printf("Nama Pengirim 		: %s\n",pengirim[i].nama_pengirim);
+		printf("Alamat Pengirim 	: %s\n",pengirim[i].alamat_pengirim);
 		printf("Berat Paket 		: %f\n",berat[i]);
-		printf("Jenis Pengiriman 	: %c\n",ketpengiriman[i]);
+		printf("Jenis Pengiriman 	: %s\n",ketpengiriman[i]);
 		printf("Ongkir				: %f\n",ongkir[i]);
 		printf("========================================\n");
 	}
+	printf("That's All, Tekan ENTER untuk Kembali");
+	getch();
+	system("cls");
 	}
 }
 //===============================================================================
 void ubahorder(){
-	int cariresi;
+	int ubahresi;
 	
 	system("cls");
 	printf("Cetak Semua Transaksi Order");
@@ -211,9 +222,9 @@ void ubahorder(){
 		getch();
 	}
 	else{
-		printf("Masukkan No Resi Yang Ingin di Cek : ");
-		scanf("%d",&cariresi);
-		// pake algoritma binary search?
+		printf("Masukkan No Resi Yang Ingin di Ubah : ");
+		
+		getch();// pake algoritma binary search?
 	}
 	
 }
@@ -271,17 +282,18 @@ void urutkanorder(){
 }
 //===============================================================================
 void seemagic(){
-	printf("Coming Soon!");
+	printf("Coming Soon!"); //delete order
 }
 
 //===============================================================================
 int main(){
+/*
 	int arr[] = { 2, 3, 4, 10, 40 }; 
 	int n = sizeof(arr) / sizeof(arr[0]); 
 	x=10;
 	int result = binarySearch(arr, 0, n - 1, x); 
 	(result == -1) ? printf("Element is not present in array") : printf("Element is present at index %d", result);
-		
+*/		
 	home();
 	return 0;
 }
