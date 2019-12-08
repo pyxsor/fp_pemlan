@@ -239,19 +239,52 @@ void lihatorder(){
 void ubahorder(){
 	int ubahresi;
 	
-	system("cls");
-	printf("Cetak Semua Transaksi Order");
-	
 	if (x==0){
 		printf("Belum Ada Transaksi Tersimpan!");
 		getch();
+		system("cls");
 	}
 	else{
 		printf("Masukkan No Resi Yang Ingin di Ubah : ");
+		scanf("%d",&ubahresi);
+		// pake algoritma binary search?
 		
-		getch();// pake algoritma binary search?
+		printf("Resi Yang akan dirubah = %d",ubahresi);
+		
+		printf("\n\nMasukkan Nama Penerima =");
+		fflush (stdin);
+		scanf("%s",&pelanggan[ubahresi].nama_penerima);
+		printf("Masukkan Alamat Penerima =");
+		fflush (stdin);
+		scanf("%s",&pelanggan[ubahresi].alamat_penerima);
+		printf("Masukkan Nama Pengirim =");
+		fflush (stdin);
+		scanf("%s",&pengirim[ubahresi].nama_pengirim);
+		printf("Masukkan Alamat Pengirim =");
+		fflush (stdin);
+		scanf("%s",&pengirim[ubahresi].alamat_pengirim);
+		printf("Masukkan Berat Paket =");
+		fflush (stdin);
+		scanf("%f",&berat[ubahresi]);
+		printf("Massukkan Jenis Pengiriman");
+		jenispengiriman();
+		fflush (stdin);
+		printf("\nPilihan Anda =");
+		scanf("%d",&pengiriman[ubahresi]);
+		if(pengiriman[ubahresi] == 1){
+		strcpy(pelanggan[ubahresi].ketpengiriman,"Besok Sampai");
+		ongkir[ubahresi] = 30000;
+		} else if(pengiriman[ubahresi] == 2){
+		strcpy(pelanggan[ubahresi].ketpengiriman,"2-3 Hari Sampai");
+		ongkir[ubahresi] = 20000;
+		} else if(pengiriman[ubahresi] == 3){
+		strcpy(pelanggan[ubahresi].ketpengiriman,"4-7 Hari Kerja Sampai");
+		ongkir[ubahresi] = 10000;
+		}
+	printf("Ubah Data Berhasil!");
+	getch();
+	system("cls");
 	}
-	
 }
 //===============================================================================
 void cariorder(){
