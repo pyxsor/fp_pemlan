@@ -310,6 +310,59 @@ void quickSort_nama (struct pelanggan a[], int lo, int hi){
     if (i<hi) quickSort_nama(a, i, hi); 
 }
 //===============================================================================
+void quickSort_nama_pengirim (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    char pivot[15]; //ganti 
+
+ 	strcpy(pivot,a[lo].nama_pengirim);
+ 	printf("%s",pivot);
+ 	getch();
+//  pembagian 
+    do{ 
+        while (strcmp(pivot,a[i].nama_pengirim)>0) i++; 
+        while (strcmp(pivot,a[j].nama_pengirim)<0) j--; 
+       
+	    if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_nama_pengirim(a, lo, j); 
+    if (i<hi) quickSort_nama_pengirim(a, i, hi); 
+}
+//===============================================================================
 void quickSort_pengiriman (struct pelanggan a[], int lo, int hi){ 
     int i=lo, j=hi, h,ha,resi_temp;
 	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
@@ -408,6 +461,460 @@ void quickSort_alamat (struct pelanggan a[], int lo, int hi){
     if (lo<j) quickSort_alamat(a, lo, j); 
     if (i<hi) quickSort_alamat(a, i, hi); 
 }
+//===============================================================================
+void quickSort_alamat_pengirim (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    char pivot[15]; //ganti 
+
+ 	strcpy(pivot,a[lo].alamat_pengirim);
+
+//  pembagian 
+    do{ 
+        while (strcmp(pivot,a[i].alamat_pengirim)>0) i++; 
+        while (strcmp(pivot,a[j].alamat_pengirim)<0) j--; 
+       
+	    if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_alamat_pengirim(a, lo, j); 
+    if (i<hi) quickSort_alamat_pengirim(a, i, hi); 
+}
+//===============================================================================
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//===============================================================================
+void quickSort_berat_des (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    int pivot=a[lo].berat; //ganti 
+ 
+//  pembagian 
+    do{ 
+        while (a[i].berat>pivot) i++; 
+        while (a[j].berat<pivot) j--; 
+        if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_berat_des(a, lo, j); 
+    if (i<hi) quickSort_berat_des(a, i, hi); 
+}
+
+//===============================================================================
+void quickSort_resi_des (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    int pivot=a[lo].resi; //ganti 
+ 
+//  pembagian 
+    do{ 
+        while (a[i].resi>pivot) i++; 
+        while (a[j].resi<pivot) j--; 
+        if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_resi_des(a, lo, j); 
+    if (i<hi) quickSort_resi_des(a, i, hi); 
+}
+//===============================================================================
+void quickSort_harga_des (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    int pivot=a[lo].totalharga; //ganti 
+ 
+//  pembagian 
+    do{ 
+        while (a[i].totalharga>pivot) i++; 
+        while (a[j].totalharga<pivot) j--; 
+        if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_harga_des(a, lo, j); 
+    if (i<hi) quickSort_harga_des(a, i, hi); 
+}
+//==========================================================================================
+
+void quickSort_nama_des (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    char pivot[15]; //ganti 
+
+ 	strcpy(pivot,a[lo].nama_penerima);
+ 	printf("%s",pivot);
+ 	getch();
+//  pembagian 
+    do{ 
+        while (strcmp(pivot,a[i].nama_penerima)<0) i++; 
+        while (strcmp(pivot,a[j].nama_penerima)>0) j--; 
+       
+	    if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_nama_des(a, lo, j); 
+    if (i<hi) quickSort_nama_des(a, i, hi); 
+}
+//===============================================================================
+void quickSort_nama_pengirim_des (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    char pivot[15]; //ganti 
+
+ 	strcpy(pivot,a[lo].nama_pengirim);
+ 	printf("%s",pivot);
+ 	getch();
+//  pembagian 
+    do{ 
+        while (strcmp(pivot,a[i].nama_pengirim)<0) i++; 
+        while (strcmp(pivot,a[j].nama_pengirim)>0) j--; 
+       
+	    if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_nama_pengirim_des(a, lo, j); 
+    if (i<hi) quickSort_nama_pengirim_des(a, i, hi); 
+}
+//===============================================================================
+void quickSort_pengiriman_des (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+ 	char pivot[30]; //ganti 
+ 	strcpy(pivot,a[lo].ketpengiriman);
+ 	
+//  pembagian 
+    do{ 
+        while (strcmp(pivot,a[i].ketpengiriman)<0) i++; 
+        while (strcmp(pivot,a[j].ketpengiriman)>0) j--; 
+        if (i<=j) 
+        { 
+           	resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_pengiriman_des(a, lo, j); 
+    if (i<hi) quickSort_pengiriman_des(a, i, hi); 
+}
+//==========================================================================================
+
+void quickSort_alamat_des (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    char pivot[15]; //ganti 
+
+ 	strcpy(pivot,a[lo].alamat_penerima);
+
+//  pembagian 
+    do{ 
+        while (strcmp(pivot,a[i].alamat_penerima)<0) i++; 
+        while (strcmp(pivot,a[j].alamat_penerima)>0) j--; 
+       
+	    if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_alamat_des(a, lo, j); 
+    if (i<hi) quickSort_alamat_des(a, i, hi); 
+}
+//===============================================================================
+void quickSort_alamat_pengirim_des (struct pelanggan a[], int lo, int hi){ 
+    int i=lo, j=hi, h,ha,resi_temp;
+	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
+    char pivot[15]; //ganti 
+
+ 	strcpy(pivot,a[lo].alamat_pengirim);
+
+//  pembagian 
+    do{ 
+        while (strcmp(pivot,a[i].alamat_pengirim)<0) i++; 
+        while (strcmp(pivot,a[j].alamat_pengirim)>0) j--; 
+       
+	    if (i<=j) 
+        { 
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
+			ha=a[i].berat; //iki
+			strcpy(ho,a[i].nama_penerima);
+			strcpy(hu,a[i].alamat_penerima);
+			strcpy(he,a[i].ketpengiriman);
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
+			
+			a[i].totalharga=a[j].totalharga; // iki
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
+			strcpy(a[i].nama_penerima,a[j].nama_penerima);
+			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
+			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
+			
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
+			a[j].totalharga=h;//tukar
+			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
+            
+			i++; j--; 
+        } 
+    } while (i<=j); 
+ 
+//  pengurutan 
+    if (lo<j) quickSort_alamat_pengirim_des(a, lo, j); 
+    if (i<hi) quickSort_alamat_pengirim_des(a, i, hi); 
+}
+//===============================================================================
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //===============================================================================
 header(){
 	printf("\n\t\tSi Bungkus\t\t\n\n");
@@ -731,14 +1238,17 @@ void cariorder(){
 //===============================================================================
 void urutkanorder(){
 	printf("|-----------------------------------------------------------\n");
-	printf("|					Urutkan Order Berdasarkan				\n");
+	printf("|					Urutkan Order Secara Ascending				\n");
 	printf("|-----------------------------------------------------------\n");
 	printf("\n1. Urutkan Order dengan No Resi");
-	printf("\n2. Urutkan Order dengan Alamat Penerima ");
-	printf("\n3. Urutkan Order dengan Nama Pengirim");
-	printf("\n4. Urutkan Order dengan Berat Terkecil");
-	printf("\n5. Urutkan Order dengan Pengiriman Tercepat-Terlambat");
-	printf("\n6. Urutkan Order dengan Harga Termurah");
+	printf("\n2. Urutkan Order dengan Nama Penerima"); 
+	printf("\n3. Urutkan Order dengan Alamat Penerima ");
+	printf("\n4. Urutkan Order dengan Nama Pengirim");
+	printf("\n5. Urutkan Order dengan Alamat Pengirim"); //update
+	printf("\n6. Urutkan Order dengan Berat");
+	printf("\n7. Urutkan Order dengan Pengiriman");
+	printf("\n8. Urutkan Order dengan Harga");
+	printf("\n9. Kembali Ke Menu Awal");
 	printf("\nPilihan Anda == ");
 	fflush (stdin);
 	scanf("%d",&menu);
@@ -747,68 +1257,99 @@ void urutkanorder(){
 				quickSort_resi (pelanggan, 0,x-1);
 			}
 		case 2:{
-			for(i=0; i<x; i++){
-				quickSort_alamat (pelanggan, 0,x-1);
-			}
-				printf("Data setelah diurutkan");
-				
+				quickSort_nama (pelanggan,0,x-1);
 			}
 		case 3:{
-					printf("case 3");
-			for(i=0; i<x; i++){
-				quickSort_nama(pelanggan,0,x-1);
-			}
-			
-		printf("Data setelah diurutkan");
-			break;
+				quickSort_alamat (pelanggan, 0,x-1);
 			}
 		case 4:{
-		for(i=0; i<x; i++){
-			quickSort_berat(pelanggan,0,x-1);
-		}
-		printf("Data setelah diurutkan");
-			break;
-   			}
+				quickSort_nama_pengirim(pelanggan,0,x-1);
+			}
 		case 5:{
-			for(i=0; i<x; i++){
-			quickSort_pengiriman (pelanggan, 0,x-1);
+				quickSort_alamat_pengirim(pelanggan,0,x-1);
 			}
-					printf("Data setelah diurutkan");
-			break;
-			}
-
 		case 6:{
-		for(i=0; i<x; i++){
-						quickSort_harga(pelanggan,0,x-1);
-		}
-			break;
-		}
-
+				quickSort_berat(pelanggan,0,x-1);
+			}
 		case 7:{
-					system("cls");
-		home();
-			break;
+				quickSort_pengiriman (pelanggan, 0,x-1);
+			}
+		case 8:{
+				quickSort_harga(pelanggan,0,x-1);
 		}
-	
+		case 9:{
+		system("cls");
+		home();
+		}
 		
 		default :{
-			printf("pilihan salah"); break;
+			printf("pilihan salah");
 			break;
 		} 
 	}
 }
 //===============================================================================
 void seemagic(){
-	printf("Coming Soon!"); //delete order
+	printf("|-----------------------------------------------------------\n");
+	printf("|					Urutkan Order Secara Descending				\n");
+	printf("|-----------------------------------------------------------\n");
+	printf("\n1. Urutkan Order dengan No Resi");
+	printf("\n2. Urutkan Order dengan Nama Penerima"); 
+	printf("\n3. Urutkan Order dengan Alamat Penerima ");
+	printf("\n4. Urutkan Order dengan Nama Pengirim");
+	printf("\n5. Urutkan Order dengan Alamat Pengirim"); //update
+	printf("\n6. Urutkan Order dengan Berat");
+	printf("\n7. Urutkan Order dengan Pengiriman");
+	printf("\n8. Urutkan Order dengan Harga");
+	printf("\n9. Kembali Ke Menu Awal");
+	printf("\nPilihan Anda == ");
+	fflush (stdin);
+	scanf("%d",&menu);
+	switch(menu){
+		case 1:{
+				quickSort_resi_des (pelanggan, 0,x-1);
+			}
+		case 2:{
+				quickSort_nama_des (pelanggan,0,x-1);
+			}
+		case 3:{
+				quickSort_alamat_des (pelanggan, 0,x-1);
+			}
+		case 4:{
+				quickSort_nama_pengirim_des (pelanggan,0,x-1);
+			}
+		case 5:{
+				quickSort_alamat_pengirim_des (pelanggan,0,x-1);
+			}
+		case 6:{
+				quickSort_berat_des (pelanggan,0,x-1);
+			}
+		case 7:{
+				quickSort_pengiriman_des (pelanggan, 0,x-1);
+			}
+		case 8:{
+				quickSort_harga_des(pelanggan,0,x-1);
+		}
+		case 9:{
+		system("cls");
+		home();
+		}
+		
+		default :{
+			printf("pilihan salah");
+			break;
+		} 
+	}
 }
 
 //===============================================================================
 int main(){
 
-	 system("COLOR C7");
+	 system("COLOR F0");
 	 
 	home();
 	
 	return 0;
 }
+
 
