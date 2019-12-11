@@ -613,6 +613,8 @@ void cariorder(){
 	scanf("%d",&menu);
 	switch(menu){
 		case 1:
+		quickSort_resi (pelanggan, 0,x-1);
+		
 		printf("Masukkan No Resi yang ingin dicari == ");
 		scanf("%s",cari);
 		hasil = binary_search_id(pelanggan,cari,x);
@@ -624,12 +626,12 @@ void cariorder(){
 			printf("[Hasil Pencarian] :\n");
 		    for(i=hasil; i<=hasil; i++){
 				printf("==============No Resi : %d==============\n",id[i]);
-				printf("Nama Penerima 		: %s\n",pelanggan[i].nama_penerima);
-				printf("Alamat Penerima 	: %s\n",pelanggan[i].alamat_penerima);
-				printf("Nama Pengirim 		: %s\n",pelanggan[i].nama_pengirim);
-				printf("Alamat Pengirim 	: %s\n",pelanggan[i].alamat_pengirim);
-				printf("Berat Paket 		: %f\n",pelanggan[i].berat);
-				printf("Jenis Pengiriman 	: %s\n",pelanggan[i].ketpengiriman);
+				printf("Nama Penerima 		: %s\n",pelanggan[i+1].nama_penerima);
+				printf("Alamat Penerima 	: %s\n",pelanggan[i+1].alamat_penerima);
+				printf("Nama Pengirim 		: %s\n",pelanggan[i+1].nama_pengirim);
+				printf("Alamat Pengirim 	: %s\n",pelanggan[i+1].alamat_pengirim);
+				printf("Berat Paket 		: %f\n",pelanggan[i+1].berat);
+				printf("Jenis Pengiriman 	: %s\n",pelanggan[i+1].ketpengiriman);
 				printf("Ongkir				: %f\n",pelanggan[i].totalharga);
 				printf("========================================\n\n");	
 			}
@@ -637,6 +639,7 @@ void cariorder(){
 		system("cls");
 			}
 		case 2:
+		quickSort_harga(pelanggan,0,x-1);
 		printf("Masukkan Total Harga yang ingin dicari == ");
 		scanf("%s",cari);
 		hasil = binary_search_totalharga(pelanggan,cari,x);
@@ -661,6 +664,7 @@ void cariorder(){
 		system("cls");
 			}
 		case 3:
+		quickSort_berat(pelanggan,0,x-1);
 		printf("Masukkan Berat yang ingin dicari == ");
 		scanf("%s",cari);
 		hasil = binary_search_berat(pelanggan,cari,x);
@@ -672,13 +676,13 @@ void cariorder(){
 			printf("[Hasil Pencarian] :\n");
 		    for(i=hasil; i<=hasil; i++){
 				printf("==============No Resi : %d==============\n",id[i]);
-				printf("Nama Penerima 		: %s\n",pelanggan[i].nama_penerima);
-				printf("Alamat Penerima 	: %s\n",pelanggan[i].alamat_penerima);
-				printf("Nama Pengirim 		: %s\n",pelanggan[i].nama_pengirim);
-				printf("Alamat Pengirim 	: %s\n",pelanggan[i].alamat_pengirim);
-				printf("Berat Paket 		: %f\n",pelanggan[i].berat);
-				printf("Jenis Pengiriman 	: %s\n",pelanggan[i].ketpengiriman);
-				printf("Ongkir				: %f\n",pelanggan[i].totalharga);
+				printf("Nama Penerima 		: %s\n",pelanggan[i+1].nama_penerima);
+				printf("Alamat Penerima 	: %s\n",pelanggan[i+1].alamat_penerima);
+				printf("Nama Pengirim 		: %s\n",pelanggan[i+1].nama_pengirim);
+				printf("Alamat Pengirim 	: %s\n",pelanggan[i+1].alamat_pengirim);
+				printf("Berat Paket 		: %f\n",pelanggan[i+1].berat);
+				printf("Jenis Pengiriman 	: %s\n",pelanggan[i+1].ketpengiriman);
+				printf("Ongkir				: %f\n",pelanggan[i+1].totalharga);
 				printf("========================================\n\n");	
 			}
 		getch();
