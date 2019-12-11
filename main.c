@@ -49,6 +49,7 @@ struct pelanggan {
 
 int pengiriman[30];
 char cari[30];
+float cari_temp;
 float ongkir[30];
 int menu1,menu,i,id[30],i2;
 int x=0,y=10000,z=0;
@@ -56,71 +57,69 @@ int pilihan;
 int arr[30];
 
 //===============================================================================
-int binary_search_id(struct pelanggan total_harga[], char cari[], int x)// no resi
+int binary_search_id(struct pelanggan resi[], int l, int r, float cari_temp) 
 {
-    int t, hasil;
-    int k = x - 1;
-    int l = 0;
+    while (l <= r) { 
+        int m = l + (r-l) / 2; 
   
-    while ( l <= k )
-    {
-        t = (l + k) / 2;
-        hasil = x, cari;
-
-        if (hasil == -1)
-            l = t + 1;
-        else if (hasil == 1)
-            k = t - 1;
+        // cek mid
+        if (resi[m].resi == cari_temp) 
+            return m;
+        // If x greater, ignore left half 
+        if (resi[m].resi < cari_temp) 
+            l = m + 1; 
+        // If x is smaller, ignore right half 
         else
-            return t;
-    }       
-    return -1;  
+            r = m - 1; 
+    } 
+    // if we reach here, then element was 
+    // not present 
+    return -1; 
+}
+
+//===============================================================================
+int binary_search_totalharga(struct pelanggan totalharga[], int l, int r, float cari_temp) 
+{
+    while (l <= r) { 
+        int m = l + (r-l) / 2; 
+  
+        // Check if x is present at mid 
+        if (totalharga[m].totalharga == cari_temp) 
+            return m;
+        // If x greater, ignore left half 
+        if (totalharga[m].totalharga < cari_temp) 
+            l = m + 1; 
+        // If x is smaller, ignore right half 
+        else
+            r = m - 1; 
+    } 
+    // if we reach here, then element was 
+    // not present 
+    return -1; 
 }
 //===============================================================================
-int binary_search_totalharga(struct pelanggan total_harga[], char cari[], int x)// Total Harga
+int binary_search_berat(struct pelanggan berat[], int l, int r, float cari_temp) 
 {
-    int t, hasil;
-    int k = x - 1;
-    int l = 0;
+    while (l <= r) { 
+        int m = l + (r-l) / 2; 
   
-    while ( l <= k )
-    {
-        t = (l + k) / 2;
-        hasil = pelanggan[t].totalharga, cari;
-
-        if (hasil == -1)
-            l = t + 1;
-        else if (hasil == 1)
-            k = t - 1;
+        // Check if x is present at mid 
+        if (berat[m].berat == cari_temp) 
+            return m;
+        // If x greater, ignore left half 
+        if (berat[m].berat < cari_temp) 
+            l = m + 1; 
+        // If x is smaller, ignore right half 
         else
-            return t;
-    }       
-    return -1;  
-}
-//===============================================================================
-int binary_search_berat(struct pelanggan berat[], char cari[], int x)// Total berat
-{
-    int t, hasil;
-    int k = x - 1;
-    int l = 0;
-  
-    while ( l <= k )
-    {
-        t = (l + k) / 2;
-        hasil = pelanggan[t].berat, cari;
-
-        if (hasil == -1)
-            l = t + 1;
-        else if (hasil == 1)
-            k = t - 1;
-        else
-            return t;
-    }       
-    return -1;  
+            r = m - 1; 
+    } 
+    // if we reach here, then element was 
+    // not present 
+    return -1; 
 }
 //===============================================================================
 void quickSort_berat (struct pelanggan a[], int lo, int hi){ 
-    int i=lo, j=hi, h,ha;
+    int i=lo, j=hi, h,ha,resi_temp;
 	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
     int pivot=a[lo].berat; //ganti 
  
@@ -130,25 +129,32 @@ void quickSort_berat (struct pelanggan a[], int lo, int hi){
         while (a[j].berat>pivot) j--; 
         if (i<=j) 
         { 
-            h=a[i].totalharga;
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
 			ha=a[i].berat; //iki
 			strcpy(ho,a[i].nama_penerima);
 			strcpy(hu,a[i].alamat_penerima);
 			strcpy(he,a[i].ketpengiriman);
-			
+			strcpy(namatmp,a[i].nama_pengirim);
+			strcpy(alamattmp,a[i].alamat_pengirim);
 			
 			a[i].totalharga=a[j].totalharga; // iki
-			a[i].berat=a[j].berat; 
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
 			strcpy(a[i].nama_penerima,a[j].nama_penerima);
 			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
 			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
+			strcpy(a[i].nama_pengirim,a[j].nama_pengirim);
+			strcpy(a[i].alamat_pengirim,a[j].alamat_pengirim);
 			
-			
-			strcpy(ho,a[j].nama_penerima);
-			strcpy(hu,a[j].alamat_penerima);
-			strcpy(he,a[j].ketpengiriman);
+			strcpy(a[j].nama_pengirim,namatmp);
+			strcpy(a[j].alamat_pengirim,alamattmp);
+			strcpy(a[j].nama_penerima,ho);
+			strcpy(a[j].alamat_penerima,hu);
+			strcpy(a[j].ketpengiriman,he);
 			a[j].totalharga=h;//tukar
 			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
             
 			i++; j--; 
         } 
@@ -161,7 +167,7 @@ void quickSort_berat (struct pelanggan a[], int lo, int hi){
 
 //===============================================================================
 void quickSort_resi (struct pelanggan a[], int lo, int hi){ 
-    int i=lo, j=hi, h,ha;
+    int i=lo, j=hi, h,ha,resi_temp;
 	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
     int pivot=a[lo].resi; //ganti 
  
@@ -171,7 +177,8 @@ void quickSort_resi (struct pelanggan a[], int lo, int hi){
         while (a[j].resi>pivot) j--; 
         if (i<=j) 
         { 
-            h=a[i].totalharga;
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
 			ha=a[i].berat; //iki
 			strcpy(ho,a[i].nama_penerima);
 			strcpy(hu,a[i].alamat_penerima);
@@ -182,7 +189,8 @@ void quickSort_resi (struct pelanggan a[], int lo, int hi){
 			
 			
 			a[i].totalharga=a[j].totalharga; // iki
-			a[i].berat=a[j].berat; 
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
 			strcpy(a[i].nama_penerima,a[j].nama_penerima);
 			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
 			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
@@ -196,6 +204,7 @@ void quickSort_resi (struct pelanggan a[], int lo, int hi){
 			strcpy(a[j].ketpengiriman,he);
 			a[j].totalharga=h;//tukar
 			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
             
 			i++; j--; 
         } 
@@ -207,7 +216,7 @@ void quickSort_resi (struct pelanggan a[], int lo, int hi){
 }
 //===============================================================================
 void quickSort_harga (struct pelanggan a[], int lo, int hi){ 
-    int i=lo, j=hi, h,ha;
+    int i=lo, j=hi, h,ha,resi_temp;
 	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
     int pivot=a[lo].totalharga; //ganti 
  
@@ -217,7 +226,8 @@ void quickSort_harga (struct pelanggan a[], int lo, int hi){
         while (a[j].totalharga>pivot) j--; 
         if (i<=j) 
         { 
-            h=a[i].totalharga;
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
 			ha=a[i].berat; //iki
 			strcpy(ho,a[i].nama_penerima);
 			strcpy(hu,a[i].alamat_penerima);
@@ -225,10 +235,9 @@ void quickSort_harga (struct pelanggan a[], int lo, int hi){
 			strcpy(namatmp,a[i].nama_pengirim);
 			strcpy(alamattmp,a[i].alamat_pengirim);
 			
-			
-			
 			a[i].totalharga=a[j].totalharga; // iki
-			a[i].berat=a[j].berat; 
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
 			strcpy(a[i].nama_penerima,a[j].nama_penerima);
 			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
 			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
@@ -242,6 +251,7 @@ void quickSort_harga (struct pelanggan a[], int lo, int hi){
 			strcpy(a[j].ketpengiriman,he);
 			a[j].totalharga=h;//tukar
 			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
             
 			i++; j--; 
         } 
@@ -254,7 +264,7 @@ void quickSort_harga (struct pelanggan a[], int lo, int hi){
 //==========================================================================================
 
 void quickSort_nama (struct pelanggan a[], int lo, int hi){ 
-    int i=lo, j=hi, h,ha;
+    int i=lo, j=hi, h,ha,resi_temp;
 	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
     char pivot[15]; //ganti 
 
@@ -268,7 +278,8 @@ void quickSort_nama (struct pelanggan a[], int lo, int hi){
        
 	    if (i<=j) 
         { 
-            h=a[i].totalharga;
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
 			ha=a[i].berat; //iki
 			strcpy(ho,a[i].nama_penerima);
 			strcpy(hu,a[i].alamat_penerima);
@@ -279,7 +290,8 @@ void quickSort_nama (struct pelanggan a[], int lo, int hi){
 			
 			
 			a[i].totalharga=a[j].totalharga; // iki
-			a[i].berat=a[j].berat; 
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
 			strcpy(a[i].nama_penerima,a[j].nama_penerima);
 			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
 			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
@@ -291,9 +303,9 @@ void quickSort_nama (struct pelanggan a[], int lo, int hi){
 			strcpy(a[j].nama_penerima,ho);
 			strcpy(a[j].alamat_penerima,hu);
 			strcpy(a[j].ketpengiriman,he);
-			
 			a[j].totalharga=h;//tukar
 			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
             
 			i++; j--; 
         } 
@@ -305,7 +317,7 @@ void quickSort_nama (struct pelanggan a[], int lo, int hi){
 }
 //===============================================================================
 void quickSort_pengiriman (struct pelanggan a[], int lo, int hi){ 
-    int i=lo, j=hi, h,ha;
+    int i=lo, j=hi, h,ha,resi_temp;
 	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
  	char pivot[30]; //ganti 
  	strcpy(pivot,a[lo].ketpengiriman);
@@ -316,7 +328,8 @@ void quickSort_pengiriman (struct pelanggan a[], int lo, int hi){
         while (strcmp(pivot,a[j].ketpengiriman)<0) j--; 
         if (i<=j) 
         { 
-           h=a[i].totalharga;
+           	resi_temp=a[i].resi;
+			h=a[i].totalharga;
 			ha=a[i].berat; //iki
 			strcpy(ho,a[i].nama_penerima);
 			strcpy(hu,a[i].alamat_penerima);
@@ -324,10 +337,9 @@ void quickSort_pengiriman (struct pelanggan a[], int lo, int hi){
 			strcpy(namatmp,a[i].nama_pengirim);
 			strcpy(alamattmp,a[i].alamat_pengirim);
 			
-			
-			
 			a[i].totalharga=a[j].totalharga; // iki
-			a[i].berat=a[j].berat; 
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
 			strcpy(a[i].nama_penerima,a[j].nama_penerima);
 			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
 			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
@@ -339,9 +351,9 @@ void quickSort_pengiriman (struct pelanggan a[], int lo, int hi){
 			strcpy(a[j].nama_penerima,ho);
 			strcpy(a[j].alamat_penerima,hu);
 			strcpy(a[j].ketpengiriman,he);
-			
 			a[j].totalharga=h;//tukar
 			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
             
 			i++; j--; 
         } 
@@ -354,7 +366,7 @@ void quickSort_pengiriman (struct pelanggan a[], int lo, int hi){
 //==========================================================================================
 
 void quickSort_alamat (struct pelanggan a[], int lo, int hi){ 
-    int i=lo, j=hi, h,ha;
+    int i=lo, j=hi, h,ha,resi_temp;
 	char ho[30],hu[30],he[30],namatmp[30],alamattmp[30]; 
     char pivot[15]; //ganti 
 
@@ -367,7 +379,8 @@ void quickSort_alamat (struct pelanggan a[], int lo, int hi){
        
 	    if (i<=j) 
         { 
-            h=a[i].totalharga;
+            resi_temp=a[i].resi;
+			h=a[i].totalharga;
 			ha=a[i].berat; //iki
 			strcpy(ho,a[i].nama_penerima);
 			strcpy(hu,a[i].alamat_penerima);
@@ -375,10 +388,9 @@ void quickSort_alamat (struct pelanggan a[], int lo, int hi){
 			strcpy(namatmp,a[i].nama_pengirim);
 			strcpy(alamattmp,a[i].alamat_pengirim);
 			
-			
-			
 			a[i].totalharga=a[j].totalharga; // iki
-			a[i].berat=a[j].berat; 
+			a[i].berat=a[j].berat;
+			a[i].resi=a[j].resi;
 			strcpy(a[i].nama_penerima,a[j].nama_penerima);
 			strcpy(a[i].alamat_penerima,a[j].alamat_penerima);
 			strcpy(a[i].ketpengiriman,a[j].ketpengiriman);
@@ -390,9 +402,9 @@ void quickSort_alamat (struct pelanggan a[], int lo, int hi){
 			strcpy(a[j].nama_penerima,ho);
 			strcpy(a[j].alamat_penerima,hu);
 			strcpy(a[j].ketpengiriman,he);
-			
 			a[j].totalharga=h;//tukar
 			a[j].berat=ha;  // iki
+            a[j].resi=resi_temp;
             
 			i++; j--; 
         } 
@@ -484,9 +496,11 @@ void home(){
 orderbaru(){
 	printf("Order Baru");
 //	input
-	printf("Nomer Resi Orderan Ini = %d",x);
+	printf("Nomer Index Orderan Ini = %d",x);
 	id[x] = x;
-	printf("\n\nMasukkan Nama Penerima =");
+	printf("\n\nMasukkan Nomer Resi = ");
+	scanf("%d", &pelanggan[x].resi);
+	printf("Masukkan Nama Penerima =");
 	fflush (stdin);
 	scanf("%s",&pelanggan[x].nama_penerima);
 	printf("Masukkan Alamat Penerima =");
@@ -533,7 +547,8 @@ void lihatorder(){
 		system("cls");
 	}
 	else{ for(i=0;i<x;i++){
-		printf("==============No Resi : %d==============\n",id[i]);
+		printf("==============No Index : %d==============\n",id[i]);
+		printf("Nomer Resi		: %d\n",pelanggan[i].resi);
 		printf("Nama Penerima 		: %s\n",pelanggan[i].nama_penerima);
 		printf("Alamat Penerima 	: %s\n",pelanggan[i].alamat_penerima);
 		printf("Nama Pengirim 		: %s\n",pelanggan[i].nama_pengirim);
@@ -548,6 +563,7 @@ void lihatorder(){
 	system("cls");
 	}
 }
+
 //===============================================================================
 void ubahorder(){
 	int ubahresi;
@@ -558,12 +574,14 @@ void ubahorder(){
 		system("cls");
 	}
 	else{
-		printf("Masukkan No Resi Yang Ingin di Ubah : ");
+		printf("Masukkan No Index Yang Ingin di Ubah : ");
 		scanf("%d",&ubahresi);
 		// pake algoritma binary search?
 		
-		printf("Resi Yang akan dirubah = %d",ubahresi);
+		printf("Nomor Index yang akan dirubah = %d",ubahresi);
 		
+		printf("Masukkan Nomer Resi = ");
+		scanf("%d", &pelanggan[x].resi);
 		printf("\n\nMasukkan Nama Penerima =");
 		fflush (stdin);
 		scanf("%s",&pelanggan[ubahresi].nama_penerima);
@@ -616,8 +634,11 @@ void cariorder(){
 		quickSort_resi (pelanggan, 0,x-1);
 		
 		printf("Masukkan No Resi yang ingin dicari == ");
-		scanf("%s",cari);
-		hasil = binary_search_id(pelanggan,cari,x);
+		scanf("%f",&cari_temp);
+		
+		hasil = binary_search_id(pelanggan, 0, x - 1, cari_temp);
+		
+		
 		if(hasil==-1){
 			printf("Tidak Ada");
 	   		getch();
@@ -625,32 +646,8 @@ void cariorder(){
 		}else {
 			printf("[Hasil Pencarian] :\n");
 		    for(i=hasil; i<=hasil; i++){
-				printf("==============No Resi : %d==============\n",id[i]);
-				printf("Nama Penerima 		: %s\n",pelanggan[i+1].nama_penerima);
-				printf("Alamat Penerima 	: %s\n",pelanggan[i+1].alamat_penerima);
-				printf("Nama Pengirim 		: %s\n",pelanggan[i+1].nama_pengirim);
-				printf("Alamat Pengirim 	: %s\n",pelanggan[i+1].alamat_pengirim);
-				printf("Berat Paket 		: %f\n",pelanggan[i+1].berat);
-				printf("Jenis Pengiriman 	: %s\n",pelanggan[i+1].ketpengiriman);
-				printf("Ongkir				: %f\n",pelanggan[i].totalharga);
-				printf("========================================\n\n");	
-			}
-		getch();
-		system("cls");
-			}
-		case 2:
-		quickSort_harga(pelanggan,0,x-1);
-		printf("Masukkan Total Harga yang ingin dicari == ");
-		scanf("%s",cari);
-		hasil = binary_search_totalharga(pelanggan,cari,x);
-		if(hasil==-1){
-			printf("Tidak Ada");
-	   		getch();
-	   		system("cls");
-		}else {
-			printf("[Hasil Pencarian] :\n");
-		    for(i=hasil; i<=hasil; i++){
-				printf("==============No Resi : %d==============\n",id[i]);
+				printf("==============No Index : %d==============\n",id[i]);
+				printf("Nomor Resi		: %d\n",pelanggan[i].resi);
 				printf("Nama Penerima 		: %s\n",pelanggan[i].nama_penerima);
 				printf("Alamat Penerima 	: %s\n",pelanggan[i].alamat_penerima);
 				printf("Nama Pengirim 		: %s\n",pelanggan[i].nama_pengirim);
@@ -663,11 +660,16 @@ void cariorder(){
 		getch();
 		system("cls");
 			}
-		case 3:
-		quickSort_berat(pelanggan,0,x-1);
-		printf("Masukkan Berat yang ingin dicari == ");
-		scanf("%s",cari);
-		hasil = binary_search_berat(pelanggan,cari,x);
+			break;
+		
+		
+		case 2:
+		quickSort_harga(pelanggan,0,x-1);
+		printf("Masukkan Total Harga yang ingin dicari == ");
+		scanf("%f",&cari_temp);
+		
+		hasil = binary_search_totalharga(pelanggan, 0, x - 1, cari_temp);
+		
 		if(hasil==-1){
 			printf("Tidak Ada");
 	   		getch();
@@ -675,7 +677,37 @@ void cariorder(){
 		}else {
 			printf("[Hasil Pencarian] :\n");
 		    for(i=hasil; i<=hasil; i++){
-				printf("==============No Resi : %d==============\n",id[i]);
+				printf("==============No Index : %d==============\n",id[i]);
+				printf("Nomor Resi		: %d\n",pelanggan[i].resi);
+				printf("Nama Penerima 		: %s\n",pelanggan[i].nama_penerima);
+				printf("Alamat Penerima 	: %s\n",pelanggan[i].alamat_penerima);
+				printf("Nama Pengirim 		: %s\n",pelanggan[i].nama_pengirim);
+				printf("Alamat Pengirim 	: %s\n",pelanggan[i].alamat_pengirim);
+				printf("Berat Paket 		: %f\n",pelanggan[i].berat);
+				printf("Jenis Pengiriman 	: %s\n",pelanggan[i].ketpengiriman);
+				printf("Ongkir				: %f\n",pelanggan[i].totalharga);
+				printf("========================================\n\n");	
+			}
+		getch();
+		system("cls");
+			}
+			break;
+		case 3:
+		quickSort_berat(pelanggan,0,x-1);
+		printf("Masukkan Berat yang ingin dicari == ");
+		scanf("%f",&cari_temp);
+		
+		hasil = binary_search_berat(pelanggan, 0, x - 1, cari_temp);
+		
+		if(hasil==-1){
+			printf("Tidak Ada");
+	   		getch();
+	   		system("cls");
+		}else {
+			printf("[Hasil Pencarian] :\n");
+		    for(i=hasil; i<=hasil; i++){
+				printf("==============No Index : %d==============\n",id[i]);
+				printf("Nomor Resi		: %d\n",pelanggan[i].resi);
 				printf("Nama Penerima 		: %s\n",pelanggan[i+1].nama_penerima);
 				printf("Alamat Penerima 	: %s\n",pelanggan[i+1].alamat_penerima);
 				printf("Nama Pengirim 		: %s\n",pelanggan[i+1].nama_pengirim);
@@ -688,6 +720,7 @@ void cariorder(){
 		getch();
 		system("cls");
 			}
+			break;
 		case 4:
 		system("cls");
 		home();	
@@ -697,8 +730,8 @@ void cariorder(){
 void urutkanorder(){
 	printf("Urutkan Order Berdasarkan");
 	printf("\n1. Urutkan Order dengan No Resi");
-	printf("\n2. Urutkan Order dengan Alamat A-Z");
-	printf("\n3. Urutkan Order dengan Nama A-Z");
+	printf("\n2. Urutkan Order dengan Alamat Penerima ");
+	printf("\n3. Urutkan Order dengan Nama Pengirim");
 	printf("\n4. Urutkan Order dengan Berat Terkecil");
 	printf("\n5. Urutkan Order dengan Pengiriman Tercepat-Terlambat");
 	printf("\n6. Urutkan Order dengan Harga Termurah");
@@ -773,5 +806,3 @@ int main(){
 	return 0;
 }
 
-
-// ===============================SAMBUTAN=======================================
