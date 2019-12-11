@@ -65,15 +65,13 @@ int binary_search_id(struct pelanggan resi[], int l, int r, float cari_temp)
         // cek mid
         if (resi[m].resi == cari_temp) 
             return m;
-        // If x greater, ignore left half 
+        // jika x lebih besar, abaikan kiri
         if (resi[m].resi < cari_temp) 
             l = m + 1; 
-        // If x is smaller, ignore right half 
+        // jika x lebih kecil, abaikan kanan 
         else
             r = m - 1; 
-    } 
-    // if we reach here, then element was 
-    // not present 
+    }  
     return -1; 
 }
 
@@ -83,18 +81,16 @@ int binary_search_totalharga(struct pelanggan totalharga[], int l, int r, float 
     while (l <= r) { 
         int m = l + (r-l) / 2; 
   
-        // Check if x is present at mid 
+         
         if (totalharga[m].totalharga == cari_temp) 
             return m;
-        // If x greater, ignore left half 
+         
         if (totalharga[m].totalharga < cari_temp) 
             l = m + 1; 
-        // If x is smaller, ignore right half 
+         
         else
             r = m - 1; 
-    } 
-    // if we reach here, then element was 
-    // not present 
+    }  
     return -1; 
 }
 //===============================================================================
@@ -103,18 +99,16 @@ int binary_search_berat(struct pelanggan berat[], int l, int r, float cari_temp)
     while (l <= r) { 
         int m = l + (r-l) / 2; 
   
-        // Check if x is present at mid 
+         
         if (berat[m].berat == cari_temp) 
             return m;
-        // If x greater, ignore left half 
+        
         if (berat[m].berat < cari_temp) 
             l = m + 1; 
-        // If x is smaller, ignore right half 
+         
         else
             r = m - 1; 
-    } 
-    // if we reach here, then element was 
-    // not present 
+    }
     return -1; 
 }
 //===============================================================================
